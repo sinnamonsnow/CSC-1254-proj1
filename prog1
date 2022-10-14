@@ -1,0 +1,90 @@
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <math.h>
+#include <algorithm>
+#include <iterator>
+using namespace std;
+
+/**
+ * Checks for bad inputs
+ * @param max Highest number
+ * @param step Intervals
+ * @param divisorOne Divisor 1
+ * @param divisorTwo Divisor 2
+ */
+bool errorCheck(int max, int step, int divisorOne, int divisorTwo){
+	if(max<1)
+	{
+		cout<<"Bad input";
+		return false;
+	}
+	if(step<1)
+	{
+			cout<<"Bad input";
+			return false;
+	}
+	if(divisorOne == divisorTwo)
+	{
+			cout<<"Bad input";
+			return false;
+	}
+	if(divisorOne<2||divisorTwo<2)
+	{
+			cout<<"Bad input";
+			return false;
+	}
+	return true;
+}
+
+/**
+* Prints "Fizz" for numbers divisible by divisorOne, "Buzz" for numbers
+* divisible by divisorTwo, and "FizzBuzz" for numbers divisible by
+* divisorOne and divisorTwo. Prints "Answered" if divisible by 42
+* @param max Determines what number the calculation should go up to
+* @param step Step size between numbers, how many to skip in between
+* @param divisorOne The number to use for the “Fizz” divisor
+* @param divisorTwo The number to use for the “Buzz” divisor
+*/
+void fizzbuzzy(int max, int step, int divisorOne, int divisorTwo){
+	if(errorCheck(max,step,divisorOne,divisorTwo)==false)
+		return;
+	for(int i=1; i<=max;i+=step)
+	{
+		if(i%42==0)
+		{
+			cout<<"Answered";
+			return;
+		}
+		if(i%divisorOne==0 && i%divisorTwo==0)
+			cout<<"FizzBuzz"<<endl;
+		else if(i%divisorOne==0)
+			cout<<"Fizz"<<endl;
+		else if(i%divisorTwo==0)
+			cout<<"Buzz"<<endl;
+		else
+			cout<<i<<endl;
+	}
+}
+
+int main() {
+    string inputString;
+    getline(cin, inputString);
+    istringstream ss(inputString);
+
+    string tempVariable;
+
+    ss >> tempVariable;
+    int max = stoi(tempVariable);
+
+    ss >> tempVariable;
+    int step = stoi(tempVariable);
+
+    ss >> tempVariable;
+    int divisorOne = stoi(tempVariable);
+
+    ss >> tempVariable;
+    int divisorTwo = stoi(tempVariable);
+
+    fizzbuzzy(max, step, divisorOne, divisorTwo);
+}
